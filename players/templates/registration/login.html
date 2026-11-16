@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+    <header>
+        <h1>Gambit Chess Club</h1>
+    </header>
+    <main>
+        <section>
+            <form method="post">
+                {% csrf_token %}
+                <fieldset>
+                    <legend>Login</legend>
+                    {{ form.as_p }}
+                </fieldset>
+                <input type="submit" value="Log in">
+            </form>
+        </section>
+    </main>
+</body>
+</html>

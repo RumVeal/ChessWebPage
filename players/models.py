@@ -1,7 +1,11 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Player(models.Model):
+    # Account
+    user = models.OneToOneField(User, on_delete=models.SET_NULL, null=True, blank=True)
+    
     # Club
     name = models.CharField(max_length=100)
     enter_date = models.DateField(verbose_name="Join date")
