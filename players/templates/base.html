@@ -7,6 +7,18 @@
 <body>
     <header>
         <h1>Gambit Chess Club</h1>
+        <nav>
+            {% if user.is_authenticated %}
+                Hi, {{ user.username }}
+                <form method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <input type="submit" value="Log out">
+                </form>
+            {% else %} 
+                <a href="{% url 'login' %}">Log in</a>
+                <a href="{% url 'signup' %}">Sign up</a>
+            {% endif %}
+        </nav>
     </header>
     <main>
         {% block content %}{% endblock %}
