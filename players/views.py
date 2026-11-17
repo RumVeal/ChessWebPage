@@ -12,7 +12,10 @@ def signup(request):
             user = form.save()
             player = Player.objects.create(user=user, name=user.username, enter_date=date.today())
             login(request, user)
-            return redirect('/admin/')
+            return redirect('home')
     else:
         form = UserCreationForm()
     return render(request, "registration/signup.html", {"form": form})
+
+def home(request):
+    return render(request, "home.html")
