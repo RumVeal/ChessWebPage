@@ -1,0 +1,33 @@
+:root {
+    --color-bg: #F5F1E8;
+    --color-primary: #203D32;
+    --color-accent: #A3462B;
+    --color-text: #203D32;
+    --color-muted: #687063;
+    --color-border: #C8C9BC;
+
+    --font-heading: "Bodoni Moda", serif;
+    --font-body: "DM Sans", sans-serif;
+}
+
+body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    margin: 0;
+}
+
+h1, h2, h3 {
+    font-family: var(--font-heading);
+    color: var(--color-primary);
+}
+
+a {
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--color-accent);
+    text-decoration: none;
+}
