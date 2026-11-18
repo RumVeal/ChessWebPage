@@ -3,6 +3,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
@@ -11,18 +12,37 @@
 </head>
 <body>
     <header>
-        <h1>Gambit Chess Club</h1>
+        <div class="topbar">
+            <span>GOOD PEOPLE. GREAT GAMES.</span>
+            <span>A CLUB FOR EVERY KIND OF PLAYER</span>
+        </div>
+        <h1>
+            <a href="{% url 'home' %}">gambit chess club</a>
+        </h1>
         <nav>
-            {% if user.is_authenticated %}
-                Hi, {{ user.username }}
-                <form method="post" action="{% url 'logout' %}">
-                    {% csrf_token %}
-                    <input type="submit" value="Log out">
-                </form>
-            {% else %} 
-                <a href="{% url 'login' %}">Log in</a>
-                <a href="{% url 'signup' %}">Sign up</a>
-            {% endif %}
+            <ul>
+                <li><a href="{% url 'home' %}">home</a></li>
+                <li><a href="#">events</a></li>
+                <li><a href="#">matches</a></li>
+                <li><a href="#">results</a></li>
+                <li><a href="#">players</a></li>
+                <li><a href="#">stats</a></li>
+                <li><a href="#">media</a></li>
+                <li><a href="#">forum</a></li>
+            </ul>
+            <div class="auth">
+                {% if user.is_authenticated %}
+                    {{ user.username }}
+                    <form method="post" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <input class="btn" type="submit" value="Log out">
+                    </form>
+                {% else %} 
+                    <a href="{% url 'login' %}">Log in</a>
+                    <span class="sep">/</span>
+                    <a href="{% url 'signup' %}">Sign up</a>
+                {% endif %}
+            </div>
         </nav>
     </header>
     <main>
