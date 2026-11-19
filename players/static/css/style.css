@@ -79,10 +79,6 @@ main {
     padding: 27px 48px;
 }
 
-.sep {
-    color: var(--color-muted);
-}
-
 .btn {
     background: none;
     border: none;
@@ -105,10 +101,17 @@ main {
 
 .btn-primary:hover {
     background-color: var(--color-accent);
+    color: var(--color-bg);
 }
 
 .auth {
     display: flex;
     align-items: center;
+    gap: 10px;
+}
+
+.home-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr 3.3fr 1.3fr 1fr;
     gap: 10px;
 }

@@ -22,13 +22,13 @@
         <nav>
             <ul>
                 <li><a href="{% url 'home' %}">home</a></li>
+                <li><a href="#">news</a></li>
                 <li><a href="#">events</a></li>
                 <li><a href="#">matches</a></li>
                 <li><a href="#">results</a></li>
                 <li><a href="#">players</a></li>
                 <li><a href="#">stats</a></li>
-                <li><a href="#">media</a></li>
-                <li><a href="#">forum</a></li>
+                <li><a href="#">knowledge</a></li>
             </ul>
             <div class="auth">
                 {% if user.is_authenticated %}
@@ -39,8 +39,7 @@
                     </form>
                 {% else %} 
                     <a href="{% url 'login' %}">Log in</a>
-                    <span class="sep">/</span>
-                    <a href="{% url 'signup' %}">Sign up</a>
+                    <a class="btn-primary" href="{% url 'signup' %}">Join the club ↗</a>
                 {% endif %}
             </div>
         </nav>

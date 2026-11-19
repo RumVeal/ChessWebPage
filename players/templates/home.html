@@ -1,6 +1,24 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h2>This is our club's home page</h2>
-    <p>Work In Progress...</p>
+    <div class="home-grid">
+        <aside class="col-side">
+            <span class="label">The game, up close</span>
+        </aside>
+        <aside class="col-left">
+            <span class="label">On calendar</span>
+            <h2>Next up</h2>
+        </aside>
+        <section class="col-main">
+            <span class="label">The club journal</span>
+            <h2>A good move brings us together</h2>
+        </section>
+        <aside class="col-right">
+            <span class="label">Over the board</span>
+            <h2>Latest results</h2>
+        </aside>
+        <aside class="col-side">
+            <span class="label">64 squares, no limits</span>
+        </aside>
+    </div>
 {% endblock %}
