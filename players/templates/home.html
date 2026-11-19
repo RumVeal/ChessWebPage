@@ -1,24 +1,27 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="home-grid">
-        <aside class="col-side">
-            <span class="label">The game, up close</span>
-        </aside>
-        <aside class="col-left">
-            <span class="label">On calendar</span>
-            <h2>Next up</h2>
-        </aside>
-        <section class="col-main">
-            <span class="label">The club journal</span>
-            <h2>A good move brings us together</h2>
-        </section>
-        <aside class="col-right">
-            <span class="label">Over the board</span>
-            <h2>Latest results</h2>
-        </aside>
-        <aside class="col-side">
-            <span class="label">64 squares, no limits</span>
-        </aside>
+    <div class="digest">
+        <span class="label">The Gambit Digest</span>
+        <span>{% now "j F Y" %} / From around the club</span>
     </div>
+    <section class="row-news">
+        <div>
+            <span class="label">World / News</span>
+            <h2>Chess around the world</h2>
+            <a href="#" class="more">All news ↗</a>
+        </div>
+        <article>
+            <span class="label">Switzerland / World Championship</span>
+            <h3>Gukesh Sindarov</h3>
+            <p>Gukesh defends his world title</p>
+            <span class="meta">World chess 20 oct 2026</span>
+        </article>
+        <article>
+            <span class="label">Hungary / Total chess</span>
+            <h3>Giri and Firouzja reach the final</h3>
+            <p>Something...</p>
+            <span class="meta">FIDE NOV 2026</span>
+        </article>
+    </section>
 {% endblock %}
