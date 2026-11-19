@@ -75,6 +75,11 @@ nav a {
     font-size: 13px;
 }
 
+nav a.active {
+    border-bottom: 2px solid var(--color-accent);
+    padding-bottom: 8px;
+}
+
 main {
     padding: 27px 48px;
 }
