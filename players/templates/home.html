@@ -1,11 +1,12 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
     <div class="digest">
         <span class="label">The Gambit Digest</span>
         <span>{% now "j F Y" %} / From around the club</span>
     </div>
-    <section class="row-news">
+    <section class="row row-news">
         <div>
             <span class="label">World / News</span>
             <h2>Chess around the world</h2>
@@ -23,5 +24,40 @@
             <p>Something...</p>
             <span class="meta">FIDE NOV 2026</span>
         </article>
+    </section>
+    <section class="row row-main">
+        <div>
+            <span class="label">01 / events</span>
+            <h2>Wednesday Night Rapid</h2>
+            <span class="label">Wed 26 Nov · 18:30</span>
+            <p>Good games. Better company.<br>Our weekly 10 + 5 rapid night.</p>
+            <span class="meta">Club room · All levels welcome</span>
+            <a href="#" class="more">All events ↗</a>
+        </div>
+        <figure>
+            <img src="{% static 'img/night-play.png' %}" alt="Club members playing chess">
+            <figcaption>A good move brings us together.</figcaption>
+        </figure>
+        <div>
+            <span class="label">02 / matches</span>
+            <h2>Last meeting</h2>
+            <span class="meta">Wed 19 Nov · Club room</span>
+            <div class="game">
+                <span>Timur</span>
+                <span class="result">1-0</span>
+                <span>Alish</span>
+            </div>
+            <div class="game">
+                <span>Bator</span>
+                <span class="result">½-½</span>
+                <span>Alex</span>
+            </div>
+            <div class="game">
+                <span>Kirill</span>
+                <span class="result">0-1</span>
+                <span>Artem</span>
+            </div>
+            <a href="#" class="more">All matches ↗</a>
+        </div>
     </section>
 {% endblock %}
