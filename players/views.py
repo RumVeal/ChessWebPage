@@ -18,4 +18,5 @@ def signup(request):
     return render(request, "registration/signup.html", {"form": form})
 
 def home(request):
-    return render(request, "home.html")
+    top_players = Player.objects.select_related('user').order_by('-club_rating')[:5]
+    return render(request, "home.html", {"top_players": top_players})

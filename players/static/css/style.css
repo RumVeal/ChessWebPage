@@ -20,6 +20,9 @@ body {
     background-color: var(--color-bg);
     color: var(--color-text);
     font-family: var(--font-body);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     margin: 0;
 }
 
@@ -89,6 +92,7 @@ nav a.active {
 }
 
 main {
+    flex: 1;
     padding: 5px 48px;
     max-width: var(--page-width);
     margin: 0 auto;

@@ -65,26 +65,14 @@
             <span class="label">03 / Players</span>
             <h2>Top Players</h2>
             <ol>
-                <li>
-                    <span>1. Timur</span>
-                    <span>1700</span>
-                </li>
-                <li>
-                    <span>2. Alish</span>
-                    <span>1659</span>
-                </li>
-                <li>
-                    <span>3. Bator</span>
-                    <span>1600</span>
-                </li>
-                <li>
-                    <span>4. Alex</span>
-                    <span>1530</span>
-                </li>
-                <li>
-                    <span>5. Artem</span>
-                    <span>1300</span>
-                </li>
+                {% for player in top_players %}
+                    <li>
+                        <span>{{ forloop.counter }}. {{ player.user.username|default:player.name }}</span> 
+                        <span>{{ player.club_rating }}</span>
+                    </li>
+                {% empty %}
+                    <li>No players yet</li>
+                {% endfor %}
             </ol>
             <a href="#" class="more">All players ↗</a>
         </div>
