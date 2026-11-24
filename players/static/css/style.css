@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 :root {
     --color-bg: #F5F1E8;
     --color-primary: #203D32;
@@ -8,6 +12,8 @@
 
     --font-heading: "Bodoni Moda", serif;
     --font-body: "DM Sans", sans-serif;
+
+    --page-width: 1280px;
 }
 
 body {
@@ -33,6 +39,8 @@ a:hover {
 
 header {
     padding: 20px 48px 0;
+    max-width: var(--page-width);
+    margin: 0 auto;
 }
 
 .topbar {
@@ -48,7 +56,7 @@ header h1 {
     line-height: 1;
     margin: 5px 0 0 0;
     text-transform: uppercase;
-    font-size: 119px;
+    font-size: 110px;
     font-weight: 900;
     letter-spacing: -4.76px;
 }
@@ -82,6 +90,8 @@ nav a.active {
 
 main {
     padding: 5px 48px;
+    max-width: var(--page-width);
+    margin: 0 auto;
 }
 
 .btn {
@@ -179,6 +189,7 @@ main {
     text-transform: uppercase;
     font-weight: 700;
     letter-spacing: 1px;
+    padding-top: 20px;
     margin-top: auto;
 }
 
@@ -232,7 +243,7 @@ figcaption {
 .row-players li {
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid var(--color-primary);
+    border-bottom: 1px solid var(--color-border);
     padding: 5px 0;
 }
 
