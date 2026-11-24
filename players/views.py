@@ -3,6 +3,9 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from .models import Player
 from datetime import date
+from django.db.models import F
+
+MODES = ['blitz', 'rapid', 'bullet']
 
 # Create your views here.
 def signup(request):
@@ -22,5 +25,11 @@ def home(request):
     return render(request, "home.html", {"top_players": top_players})
 
 def player_list(request):
-    all_players = Player.objects.select_related('user').order_by('-club_rating')
-    return render(request, "players/player_list.html", {"all_players": all_players})
+    mode = request.GET.get('mode', 'blitz')
+    if mode not in MODES: 
+        mode = 'blitz'
+    all_players = (Player.objects.select_related('user')
+                   .order_by('-club_rating')
+                   .annotate(lichess=F(f"lichess_{mode}_rating"), 
+                             chesscom=F(f"chesscom_{mode}_rating")))
+    return render(request, "players/player_list.html", {"all_players": all_players, "mode": mode, "MODES": MODES})

@@ -25,7 +25,7 @@
                 <li><a href="#">news</a></li>
                 <li><a href="#">events</a></li>
                 <li><a href="#">matches</a></li>
-                <li><a href="{% url 'player_list' %}">players</a></li>
+                <li><a href="{% url 'player_list' %}" {% if request.resolver_match.url_name == 'player_list' %} class="active" {% endif %}>players</a></li>
                 <li><a href="#">stats</a></li>
                 <li><a href="#">knowledge</a></li>
             </ul>
