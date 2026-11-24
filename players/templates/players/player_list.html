@@ -6,11 +6,13 @@
 
 {% block content %}
     <span class="label">Club</span>
-    <h2>Players</h2>
-    {% for m in MODES %}
-        <a href="?mode={{ m }}">{{ m }}</a>
-    {% endfor %}
-    <table>
+    <h2 class="page-title">Players</h2>
+    <div class="tabs">
+        {% for m in MODES %}
+            <a href="?mode={{ m }}" {% if m == mode %} class="active" {% endif %}>{{ m }}</a>
+        {% endfor %}
+    </div>
+    <table class="players-table">
         <thead>
             <tr>
                 <th>#</th>

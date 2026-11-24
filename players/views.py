@@ -5,7 +5,7 @@ from .models import Player
 from datetime import date
 from django.db.models import F
 
-MODES = ['blitz', 'rapid', 'bullet']
+MODES = ['bullet', 'blitz', 'rapid']
 
 # Create your views here.
 def signup(request):
