@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Players
+{% endblock %}
+
+{% block content %}
+    <span class="label">Club</span>
+    <h2>Players</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Player</th>
+                <th>Club rating</th>
+                <th>Lichess rating</th>
+                <th>Chess.com rating</th>
+            </tr>
+        </thead>
+            <tbody>
+                {% for player in all_players %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ player.user.username|default:player.name }}</td>
+                        <td>{{ player.club_rating }}</td>
+                        <td>{{ player.lichess_blitz_rating|default:"—" }}</td>
+                        <td>{{ player.chesscom_blitz_rating|default:"—" }}</td>
+                    </tr>
+                {% empty %}
+                <tr> 
+                    <td colspan="5">No players yet</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+    </table>
+{% endblock %}

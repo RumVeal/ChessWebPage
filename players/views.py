@@ -20,3 +20,7 @@ def signup(request):
 def home(request):
     top_players = Player.objects.select_related('user').order_by('-club_rating')[:5]
     return render(request, "home.html", {"top_players": top_players})
+
+def player_list(request):
+    all_players = Player.objects.select_related('user').order_by('-club_rating')
+    return render(request, "players/player_list.html", {"all_players": all_players})
