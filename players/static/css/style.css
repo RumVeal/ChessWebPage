@@ -255,3 +255,43 @@ figcaption {
     margin-top: 20px;
     width: 30%;
 }
+
+.row-stats {
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    border-bottom: none;
+}
+
+.stat-number {
+    font-family: var(--font-heading);
+    font-size: 56px;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--color-primary);
+}
+
+footer {
+    background-color: var(--color-primary);
+    color: var(--color-bg);
+    padding: 40px 0;
+    margin-top: 20px;
+}
+
+.footer-inner {
+    max-width: var(--page-width);
+    margin: 0 auto;
+    padding: 0 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.footer-title {
+    font-family: var(--font-heading);
+    font-size: 36px;
+    font-weight: 700;
+    margin: 0 0 8px;
+}
+
+.footer-inner > div:last-child {
+    text-align: right;
+}
