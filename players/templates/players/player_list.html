@@ -12,30 +12,32 @@
             <a href="?mode={{ m }}" {% if m == mode %} class="active" {% endif %}>{{ m }}</a>
         {% endfor %}
     </div>
-    <table class="players-table">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Player</th>
-                <th>Club rating</th>
-                <th>Lichess {{ mode }}</th>
-                <th>Chess.com {{ mode }}</th>
-            </tr>
-        </thead>
+    <div class="table-wrap">
+            <table class="players-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Player</th>
+                    <th>Club rating</th>
+                    <th>Lichess {{ mode }}</th>
+                    <th>Chess.com {{ mode }}</th>
+                </tr>
+            </thead>
             <tbody>
                 {% for player in all_players %}
-                    <tr>
+                        <tr>
                         <td>{{ forloop.counter }}</td>
-                        <td>{{ player.user.username|default:player.name }}</td>
+                        <td>{{ player.user.username|default:player.name }}</td>                           
                         <td>{{ player.club_rating }}</td>
                         <td>{{ player.lichess|default:"—" }}</td>
                         <td>{{ player.chesscom|default:"—" }}</td>
                     </tr>
                 {% empty %}
                 <tr> 
-                    <td colspan="5">No players yet</td>
+                    <td colspan="5">No players yet</td> 
                 </tr>
-                {% endfor %}
+                    {% endfor %}
             </tbody>
-    </table>
+        </table>
+    </div>
 {% endblock %}
