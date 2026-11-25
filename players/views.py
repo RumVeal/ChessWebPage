@@ -21,7 +21,9 @@ def signup(request):
     return render(request, "registration/signup.html", {"form": form})
 
 def home(request):
-    top_players = Player.objects.select_related('user').order_by('-club_rating')[:5]
+    top_players = (Player.objects.select_related('user')
+                   .filter(is_member=True)
+                   .order_by('-club_rating')[:5])
     return render(request, "home.html", {"top_players": top_players})
 
 def player_list(request):
@@ -29,6 +31,7 @@ def player_list(request):
     if mode not in MODES: 
         mode = 'blitz'
     all_players = (Player.objects.select_related('user')
+                   .filter(is_member=True)
                    .order_by('-club_rating')
                    .annotate(lichess=F(f"lichess_{mode}_rating"), 
                              chesscom=F(f"chesscom_{mode}_rating")))

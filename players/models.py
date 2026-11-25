@@ -27,5 +27,6 @@ class Player(models.Model):
     lichess_blitz_rating = models.IntegerField(null=True, verbose_name="Lichess Blitz", blank=True)
     lichess_blitz_prov = models.BooleanField(default=False, verbose_name="Lichess Blitz provisional")
     
+    is_member = models.BooleanField(default=False, verbose_name="Club member")
     def __str__(self):
         return self.name
