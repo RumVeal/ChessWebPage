@@ -9,12 +9,6 @@
     <h2 class="page-title">Edit profile</h2>
     <form method="post">
         {% csrf_token %} {{ form.as_p }}
-        <div class="profile-actions">
-            <input class="btn-primary" type="submit" value="Save">
-        </div>
+        <input class="btn-primary" type="submit" value="Save">
     </form>
 {% endblock %}
-
-
-
-

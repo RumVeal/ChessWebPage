@@ -6,6 +6,9 @@ from .models import Player
 from datetime import date
 from django.db.models import F
 from .forms import PlayerProfileForm
+from .services import update_player_ratings
+from django.contrib import messages
+
 
 MODES = ['bullet', 'blitz', 'rapid']
 
@@ -50,6 +53,11 @@ def profile_edit(request):
         form = PlayerProfileForm(request.POST, instance=player)
         if form.is_valid():
             form.save()
+            errors = update_player_ratings(player)
+            if not errors:
+                messages.success(request, "Profile updated")
+            for error in errors:
+                messages.warning(request, error)
             return redirect('player_detail', pk=player.pk)
     else:
         form = PlayerProfileForm(instance=player)
