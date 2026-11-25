@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}
+     {{ player.user.username|default:player.name }}
+{% endblock %}
+
+{% block content %}
+    <h2 class="page-title">{{ player.user.username|default:player.name }} profile</h2>
+    <div>
+        <span class="meta">Joined {{ player.enter_date|date:"j F Y" }}</span>
+    </div>
+    <div class="profile-stat">
+        <span class="stat-number">{{ player.club_rating }}</span>
+        <span class="meta">Club rating</span>
+    </div>
+
+    <table class="players-table profile-table">
+        <thead>
+            <tr>
+                <th>Time control</th>
+                <th>Lichess</th>
+                <th>Chess.com</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Bullet</td>                          
+                <td>
+                    {{ player.lichess_bullet_rating|default:"—" }}{% if player.lichess_bullet_prov %}?{% endif %}
+                </td>
+                <td>{{ player.chesscom_bullet_rating|default:"—" }}</td>
+            </tr>
+            <tr>
+                <td>Blitz</td>                          
+                <td>
+                    {{ player.lichess_blitz_rating|default:"—" }}{% if player.lichess_blitz_prov %}?{% endif %}
+                </td>
+                <td>{{ player.chesscom_blitz_rating|default:"—" }}</td>
+            </tr>
+            <tr>
+                <td>Rapid</td>                          
+                <td>
+                    {{ player.lichess_rapid_rating|default:"—" }}{% if player.lichess_rapid_prov %}?{% endif %}
+                </td>
+                <td>{{ player.chesscom_rapid_rating|default:"—" }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="another-platform">
+        {% if player.lichess_nickname %}
+        <a href="https://lichess.org/@/{{ player.lichess_nickname }}" target="_blank" class="more">Lichess ↗&#xFE0E;</a>
+        {% endif %}
+        {% if player.chesscom_nickname %}
+        <a href="https://www.chess.com/member/{{ player.chesscom_nickname }}" target="_blank" class="more">Chess.com ↗&#xFE0E;</a>
+        {% endif %}
+    </div>
+{% endblock %}

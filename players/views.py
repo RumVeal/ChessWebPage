@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from .models import Player
@@ -36,3 +36,7 @@ def player_list(request):
                    .annotate(lichess=F(f"lichess_{mode}_rating"), 
                              chesscom=F(f"chesscom_{mode}_rating")))
     return render(request, "players/player_list.html", {"all_players": all_players, "mode": mode, "MODES": MODES})
+
+def player_detail(request, pk):
+    player = get_object_or_404(Player, pk=pk, is_member=True)
+    return render(request, "players/player_detail.html", {"player": player})

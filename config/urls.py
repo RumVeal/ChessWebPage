@@ -24,4 +24,5 @@ urlpatterns = [
     path('accounts/', include('players.urls')),
     path('', views.home, name='home'),
     path('players/', views.player_list, name='player_list'),
+    path('players/<int:pk>/', views.player_detail, name='player_detail'),
 ]
