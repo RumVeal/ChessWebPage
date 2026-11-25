@@ -31,14 +31,18 @@
             </ul>
             <div class="auth">
                 {% if user.is_authenticated %}
-                    {{ user.username }}
+                    {% if user.player %}
+                        <a href="{% url 'player_detail' user.player.pk %}">{{ user.username }}</a>
+                    {% else %}
+                        {{ user.username }}
+                    {% endif %}
                     <form method="post" action="{% url 'logout' %}">
                         {% csrf_token %}
                         <input class="btn" type="submit" value="Log out">
                     </form>
                 {% else %} 
                     <a href="{% url 'login' %}">Log in</a>
-                    <a class="btn-primary" href="{% url 'signup' %}">Join the club ↗</a>
+                    <a class="btn-primary" href="{% url 'signup' %}">Join the club ↗&#xFE0E;</a>
                 {% endif %}
             </div>
         </nav>

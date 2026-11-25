@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
 from .models import Player
 from datetime import date
 from django.db.models import F
+from .forms import PlayerProfileForm
 
 MODES = ['bullet', 'blitz', 'rapid']
 
@@ -40,3 +42,15 @@ def player_list(request):
 def player_detail(request, pk):
     player = get_object_or_404(Player, pk=pk, is_member=True)
     return render(request, "players/player_detail.html", {"player": player})
+
+@login_required
+def profile_edit(request):
+    player = get_object_or_404(Player, user=request.user)
+    if request.method == "POST":
+        form = PlayerProfileForm(request.POST, instance=player)
+        if form.is_valid():
+            form.save()
+            return redirect('player_detail', pk=player.pk)
+    else:
+        form = PlayerProfileForm(instance=player)
+    return render(request, "players/profile_edit.html", {"form": form})

@@ -6,6 +6,9 @@
 
 {% block content %}
     <h2 class="page-title">{{ player.user.username|default:player.name }} profile</h2>
+    {% if player.user %}
+        <div class="meta">{{ player.name }}</div>
+    {% endif %}
     <div>
         <span class="meta">Joined {{ player.enter_date|date:"j F Y" }}</span>
     </div>
@@ -54,4 +57,9 @@
         <a href="https://www.chess.com/member/{{ player.chesscom_nickname }}" target="_blank" class="more">Chess.com ↗&#xFE0E;</a>
         {% endif %}
     </div>
+    {% if user == player.user %}
+        <div class="profile-actions">
+            <a href="{% url 'profile_edit' %}" class="btn-primary">Edit profile</a>
+        </div>
+    {% endif %}
 {% endblock %}
