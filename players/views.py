@@ -13,6 +13,7 @@ from .services import update_player_ratings
 
 
 MODES = ['bullet', 'blitz', 'rapid']
+SORTS = ['club', 'lichess', 'chesscom']
 
 # Create your views here.
 def signup(request):
@@ -20,7 +21,7 @@ def signup(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            player = Player.objects.create(user=user, name=user.username, enter_date=date.today())
+            Player.objects.create(user=user, name=user.username, enter_date=date.today())
             login(request, user)
             return redirect('home')
     else:
@@ -35,14 +36,23 @@ def home(request):
 
 def player_list(request):
     mode = request.GET.get('mode', 'blitz')
+    sort = request.GET.get('sort', 'club')
     if mode not in MODES: 
         mode = 'blitz'
+    if sort not in SORTS:
+        sort = 'club'
+    
+    if sort == 'club':
+        ordering = '-club_rating'
+    else:
+        ordering = F(sort).desc(nulls_last=True)
+        
     all_players = (Player.objects.select_related('user')
-                   .filter(is_member=True)
-                   .order_by('-club_rating')
-                   .annotate(lichess=F(f"lichess_{mode}_rating"), 
-                             chesscom=F(f"chesscom_{mode}_rating")))
-    return render(request, "players/player_list.html", {"all_players": all_players, "mode": mode, "MODES": MODES})
+                       .filter(is_member=True)
+                       .annotate(lichess=F(f"lichess_{mode}_rating"), 
+                                 chesscom=F(f"chesscom_{mode}_rating"))
+                       .order_by(ordering))
+    return render(request, "players/player_list.html", {"all_players": all_players, "mode": mode, "MODES": MODES, "sort": sort})
 
 def player_detail(request, pk):
     player = get_object_or_404(Player, pk=pk)

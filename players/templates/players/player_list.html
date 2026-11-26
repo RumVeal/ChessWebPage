@@ -9,7 +9,7 @@
     <h2 class="page-title">Players</h2>
     <div class="tabs">
         {% for m in MODES %}
-            <a href="?mode={{ m }}" {% if m == mode %} class="active" {% endif %}>{{ m }}</a>
+            <a href="?mode={{ m }}&sort={{ sort }}" {% if m == mode %} class="active" {% endif %}>{{ m }}</a>
         {% endfor %}
     </div>
     <div class="table-wrap">
@@ -18,14 +18,20 @@
                 <tr>
                     <th>#</th>
                     <th>Player</th>
-                    <th>Club rating</th>
-                    <th>Lichess {{ mode }}</th>
-                    <th>Chess.com {{ mode }}</th>
+                    <th {% if sort == 'club' %} class="active" {% endif %}>
+                        <a href="?mode={{ mode }}&sort=club">Club rating</a>
+                    </th>
+                    <th {% if sort == 'lichess' %} class="active" {% endif %}>
+                        <a href="?mode={{ mode }}&sort=lichess">Lichess {{ mode }}</a>
+                    </th>
+                    <th {% if sort == 'chesscom' %} class="active" {% endif %}>
+                        <a href="?mode={{ mode }}&sort=chesscom">Chess.com {{ mode }}</a>
+                    </th>
                 </tr>
             </thead>
             <tbody>
                 {% for player in all_players %}
-                        <tr>
+                    <tr>
                         <td>{{ forloop.counter }}</td>
                         <td>
                             <a href="{% url 'player_detail' player.pk %}">{{ player.user.username|default:player.name }}</a>
