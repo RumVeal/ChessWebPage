@@ -6,14 +6,22 @@
 
 {% block content %}
     <h2 class="page-title">{{ player.user.username|default:player.name }} profile</h2>
-    {% if player.user %}
+    {% if player.user and player.name != player.user.username %}
         <div class="meta">{{ player.name }}</div>
     {% endif %}
     <div>
-        <span class="meta">Joined {{ player.enter_date|date:"j F Y" }}</span>
+        {% if not player.is_member %}
+            <span class="meta">Waiting for club approval</span>
+        {% elif player.is_member %}
+            <span class="meta">Joined {{ player.enter_date|date:"j F Y" }}</span>
+        {% endif %}
     </div>
     <div class="profile-stat">
-        <span class="stat-number">{{ player.club_rating }}</span>
+        {% if player.is_member %}
+            <span class="stat-number">{{ player.club_rating }}</span>
+        {% elif not player.is_member %}
+            <span class="stat-number">—</span>
+        {% endif %}
         <span class="meta">Club rating</span>
     </div>
 
