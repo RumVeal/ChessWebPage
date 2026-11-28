@@ -369,10 +369,6 @@ footer {
     gap: 20px;
 }
 
-.profile-actions {
-    margin-top: 20px;
-}
-
 input[type="text"], input[type="password"] {
     background-color: var(--color-border);
     border: 1px solid var(--color-primary);
@@ -405,6 +401,12 @@ input[type="text"], input[type="password"] {
 
 .players-table th.active {
     border-bottom: 2px solid var(--color-accent);
+}
+
+.profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 @media (max-width: 768px) {

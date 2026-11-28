@@ -14,6 +14,7 @@ from .services import update_player_ratings
 
 MODES = ['bullet', 'blitz', 'rapid']
 SORTS = ['club', 'lichess', 'chesscom']
+TABS = ['overview', 'stats', 'matches']
 
 # Create your views here.
 def signup(request):
@@ -58,7 +59,10 @@ def player_detail(request, pk):
     player = get_object_or_404(Player, pk=pk)
     if not player.is_member and request.user != player.user:
         raise Http404
-    return render(request, "players/player_detail.html", {"player": player})
+    tab = request.GET.get('tab', 'overview')
+    if tab not in TABS: 
+        tab = 'overview'
+    return render(request, "players/player_detail.html", {"player": player, "tab": tab, "TABS": TABS})
 
 @login_required
 def profile_edit(request):

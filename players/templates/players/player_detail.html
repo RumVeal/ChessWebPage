@@ -5,69 +5,81 @@
 {% endblock %}
 
 {% block content %}
-    <h2 class="page-title">{{ player.user.username|default:player.name }} profile</h2>
-    {% if player.user and player.name != player.user.username %}
-        <div class="meta">{{ player.name }}</div>
-    {% endif %}
-    <div>
-        {% if not player.is_member %}
-            <span class="meta">Waiting for club approval</span>
-        {% elif player.is_member %}
-            <span class="meta">Joined {{ player.enter_date|date:"j F Y" }}</span>
+    <div class="profile-header">
+        <h2 class="page-title">{{ player.user.username|default:player.name }} profile</h2>
+        {% if user == player.user %}
+            <div class="profile-actions">
+                <a href="{% url 'profile_edit' %}" class="btn-primary">Edit</a>
+            </div>
         {% endif %}
     </div>
-    <div class="profile-stat">
-        {% if player.is_member %}
-            <span class="stat-number">{{ player.club_rating }}</span>
-        {% elif not player.is_member %}
-            <span class="stat-number">—</span>
-        {% endif %}
-        <span class="meta">Club rating</span>
+     <div class="tabs">
+        {% for t in TABS %}
+            <a href="?tab={{ t }}" {% if t == tab %} class="active" {% endif %}>{{ t }}</a>
+        {% endfor %}
     </div>
 
-    <table class="players-table profile-table">
-        <thead>
-            <tr>
-                <th>Time control</th>
-                <th>Lichess</th>
-                <th>Chess.com</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Bullet</td>                          
-                <td>
-                    {{ player.lichess_bullet_rating|default:"—" }}{% if player.lichess_bullet_prov %}?{% endif %}
-                </td>
-                <td>{{ player.chesscom_bullet_rating|default:"—" }}</td>
-            </tr>
-            <tr>
-                <td>Blitz</td>                          
-                <td>
-                    {{ player.lichess_blitz_rating|default:"—" }}{% if player.lichess_blitz_prov %}?{% endif %}
-                </td>
-                <td>{{ player.chesscom_blitz_rating|default:"—" }}</td>
-            </tr>
-            <tr>
-                <td>Rapid</td>                          
-                <td>
-                    {{ player.lichess_rapid_rating|default:"—" }}{% if player.lichess_rapid_prov %}?{% endif %}
-                </td>
-                <td>{{ player.chesscom_rapid_rating|default:"—" }}</td>
-            </tr>
-        </tbody>
-    </table>
-    <div class="another-platform">
-        {% if player.lichess_nickname %}
-        <a href="https://lichess.org/@/{{ player.lichess_nickname }}" target="_blank" class="more">Lichess ↗&#xFE0E;</a>
+    {% if tab == 'overview' %}
+        {% if player.user and player.name != player.user.username %}
+            <div class="meta">Name: {{ player.name }}</div>
         {% endif %}
-        {% if player.chesscom_nickname %}
-        <a href="https://www.chess.com/member/{{ player.chesscom_nickname }}" target="_blank" class="more">Chess.com ↗&#xFE0E;</a>
-        {% endif %}
-    </div>
-    {% if user == player.user %}
-        <div class="profile-actions">
-            <a href="{% url 'profile_edit' %}" class="btn-primary">Edit profile</a>
+        <div>
+            {% if not player.is_member %}
+                <span class="meta">Waiting for club approval</span>
+            {% else %}
+                <span class="meta">Join date: {{ player.enter_date|date:"j F Y" }}</span>
+            {% endif %}
         </div>
+        <div class="another-platform">
+            {% if player.lichess_nickname %}
+                <a href="https://lichess.org/@/{{ player.lichess_nickname }}" target="_blank" class="more">Lichess ↗&#xFE0E;</a>
+            {% endif %}
+            {% if player.chesscom_nickname %}
+                <a href="https://www.chess.com/member/{{ player.chesscom_nickname }}" target="_blank" class="more">Chess.com ↗&#xFE0E;</a>
+            {% endif %}
+        </div>
+    {% elif tab == 'stats' %}
+        <div class="profile-stat">
+            {% if player.is_member %}
+                <span class="stat-number">{{ player.club_rating }}</span>
+            {% else %}
+                <span class="stat-number">—</span>
+            {% endif %}
+            <span class="meta">Club rating</span>
+        </div>
+        <table class="players-table profile-table">
+            <thead>
+                <tr>
+                    <th>Time control</th>
+                    <th>Lichess</th>
+                    <th>Chess.com</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Bullet</td>                          
+                    <td>
+                        {{ player.lichess_bullet_rating|default:"—" }}{% if player.lichess_bullet_prov %}?{% endif %}
+                    </td>
+                    <td>{{ player.chesscom_bullet_rating|default:"—" }}</td>
+                </tr>
+                <tr>
+                    <td>Blitz</td>                          
+                    <td>
+                        {{ player.lichess_blitz_rating|default:"—" }}{% if player.lichess_blitz_prov %}?{% endif %}
+                    </td>
+                    <td>{{ player.chesscom_blitz_rating|default:"—" }}</td>
+                </tr>
+                <tr>
+                    <td>Rapid</td>                          
+                    <td>
+                        {{ player.lichess_rapid_rating|default:"—" }}{% if player.lichess_rapid_prov %}?{% endif %}
+                    </td>
+                    <td>{{ player.chesscom_rapid_rating|default:"—" }}</td>
+                </tr>
+            </tbody>
+        </table>
+    {% elif tab == 'matches' %}
+        <div>No matches yet</div>
     {% endif %}
 {% endblock %}
