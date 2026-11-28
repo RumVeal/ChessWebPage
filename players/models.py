@@ -9,7 +9,7 @@ class Player(models.Model):
     # Club
     name = models.CharField(max_length=100)
     enter_date = models.DateField(verbose_name="Join date")
-    club_rating = models.IntegerField(default=500)
+    club_rapid_rating = models.IntegerField(default=500)
     ratings_updated_at = models.DateTimeField(null=True, blank=True)
     
     # Chesscom

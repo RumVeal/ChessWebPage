@@ -32,7 +32,7 @@ def signup(request):
 def home(request):
     top_players = (Player.objects.select_related('user')
                    .filter(is_member=True)
-                   .order_by('-club_rating')[:5])
+                   .order_by('-club_rapid_rating')[:5])
     return render(request, "home.html", {"top_players": top_players})
 
 def player_list(request):
@@ -44,7 +44,7 @@ def player_list(request):
         sort = 'club'
     
     if sort == 'club':
-        ordering = '-club_rating'
+        ordering = '-club_rapid_rating'
     else:
         ordering = F(sort).desc(nulls_last=True)
         

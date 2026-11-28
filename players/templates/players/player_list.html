@@ -19,7 +19,7 @@
                     <th>#</th>
                     <th>Player</th>
                     <th {% if sort == 'club' %} class="active" {% endif %}>
-                        <a href="?mode={{ mode }}&sort=club">Club rating</a>
+                        <a href="?mode={{ mode }}&sort=club">Club rapid</a>
                     </th>
                     <th {% if sort == 'lichess' %} class="active" {% endif %}>
                         <a href="?mode={{ mode }}&sort=lichess">Lichess {{ mode }}</a>
@@ -36,7 +36,7 @@
                         <td>
                             <a href="{% url 'player_detail' player.pk %}">{{ player.user.username|default:player.name }}</a>
                         </td>                           
-                        <td>{{ player.club_rating }}</td>
+                        <td>{{ player.club_rapid_rating }}</td>
                         <td>{{ player.lichess|default:"—" }}</td>
                         <td>{{ player.chesscom|default:"—" }}</td>
                     </tr>

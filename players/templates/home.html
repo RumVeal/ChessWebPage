@@ -68,7 +68,7 @@
                 {% for player in top_players %}
                     <li>
                         <span>{{ forloop.counter }}. <a href="{% url 'player_detail' player.pk %}">{{ player.user.username|default:player.name }}</a></span> 
-                        <span>{{ player.club_rating }}</span>
+                        <span>{{ player.club_rapid_rating }}</span>
                     </li>
                 {% empty %}
                     <li>No players yet</li>
